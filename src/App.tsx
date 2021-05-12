@@ -1,19 +1,39 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+  HashRouter as Router,
+  Route,Link,Redirect, Switch,
 } from 'react-router-dom'
 
-const Home = () => (
+const App = () => (
+  <Router>
+    <div>
+      <ul>
+        <li><Link to="/tags">标签页</Link></li>
+        <li><Link to="/money">记账页</Link></li>
+        <li><Link to="/statistics">统计页</Link></li>
+      </ul>
+
+      <hr/>
+      <Switch>
+        <Route path="/tags" component={Tags}/>
+        <Route path="/money" component={Money}/>
+        <Route path="/statistics" component={Statistics}/>
+        <Redirect exact path="/" to="/money" />
+        <Route component={NoMatch}/>
+      </Switch>
+    </div>
+  </Router>
+)
+
+const Tags = () => (
   <div>
-    <h2>Home</h2>
+    <h2>Tags</h2>
   </div>
 )
 
-const About = () => (
+const Money = () => (
   <div>
-    <h2>About</h2>
+    <h2>Money</h2>
   </div>
 )
 
@@ -23,9 +43,9 @@ const Topic = ({ match }) => (
   </div>
 )
 
-const Topics = ({ match }) => (
+const Statistics = ({ match }) => (
   <div>
-    <h2>Topics</h2>
+    <h2>Statistics</h2>
     <ul>
       <li>
         <Link to={`${match.url}/rendering`}>
@@ -51,22 +71,10 @@ const Topics = ({ match }) => (
   </div>
 )
 
-const App = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/topics">Topics</Link></li>
-      </ul>
-
-      <hr/>
-
-      <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/topics" component={Topics}/>
-    </div>
-  </Router>
+const NoMatch = () => (
+  <div>
+    <h2>页面不存在</h2>
+  </div>
 )
 
 export default App;

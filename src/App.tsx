@@ -1,13 +1,14 @@
-import Layout from "components/Layout";
-import Nav from "components/Nav";
 import React from "react";
 import {
   HashRouter as Router,
   Route,
-  Link,
   Redirect,
   Switch,
 } from "react-router-dom";
+import Money from "views/Money";
+import NoMatch from "views/NoMatch";
+import Statistics from "views/Statistics";
+import Tags from "views/Tags";
 
 const App = () => (
   <Router>
@@ -19,30 +20,6 @@ const App = () => (
       <Route component={NoMatch} />
     </Switch>
   </Router>
-);
-
-const Tags = () => (
-  <Layout>
-    <h2>Tags</h2>
-  </Layout>
-);
-
-const Money = () => (
-  <Layout>
-    <h2>Tags</h2>
-  </Layout>
-);
-
-const Statistics = () => (
-  <Layout>
-    <h2>Tags</h2>
-  </Layout>
-);
-
-const NoMatch = () => (
-  <div>
-    <h2>页面不存在</h2>
-  </div>
 );
 
 export default App;

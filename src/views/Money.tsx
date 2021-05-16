@@ -13,12 +13,7 @@ const MoneyLayout = styled(Layout)`
 const Money = () => (
   <MoneyLayout>
     <TagSection />
-    <NoteSection>
-      <label>
-        <span>备注</span>
-        <input type="text" placeholder="在这里添加备注" />
-      </label>
-    </NoteSection>
+    <NoteSection />
     <CategorySection>
       <ul>
         <li className="selected">支出</li>

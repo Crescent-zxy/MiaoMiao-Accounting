@@ -4,6 +4,11 @@ import styled from "styled-components";
 const TagSection = styled.section`
   background-color: #fff;
   padding: 12px 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   > ol {
     margin: 0 -12px;
     > li {
@@ -122,9 +127,13 @@ const NumberPadSection = styled.section`
     }
   }
 `;
+const MoneyLayout = styled(Layout)`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Money = () => (
-  <Layout>
+  <MoneyLayout>
     <TagSection>
       <ol>
         <li>衣</li>
@@ -165,7 +174,7 @@ const Money = () => (
         <button>.</button>
       </div>
     </NumberPadSection>
-  </Layout>
+  </MoneyLayout>
 );
 
 export default Money;

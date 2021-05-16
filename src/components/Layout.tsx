@@ -14,7 +14,7 @@ const Main = styled.div`
 
 const Layout = (props: any) => (
   <Wrapper>
-    <Main>{props.children}</Main>
+    <Main className={props.className}>{props.children}</Main>
     <Nav />
   </Wrapper>
 );

@@ -1,6 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const CategorySection = styled.section`
+const Wrapper = styled.section`
   > ul {
     display: flex;
     background: #c4c4c4;
@@ -22,5 +23,31 @@ const CategorySection = styled.section`
     }
   }
 `;
+
+const CategorySection: React.FC = () => {
+  const [category, setCategory] = useState<string>("-");
+  return (
+    <Wrapper>
+      <ul>
+        <li
+          className={category === "-" ? "selected" : ""}
+          onClick={() => {
+            setCategory("-");
+          }}
+        >
+          支出
+        </li>
+        <li
+          className={category === "+" ? "selected" : ""}
+          onClick={() => {
+            setCategory("+");
+          }}
+        >
+          收入
+        </li>
+      </ul>
+    </Wrapper>
+  );
+};
 
 export { CategorySection };

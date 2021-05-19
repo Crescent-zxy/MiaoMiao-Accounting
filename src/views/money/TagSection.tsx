@@ -42,24 +42,27 @@ const TagSection: React.FunctionComponent = (props) => {
       setTags([...tags, tagName]);
     }
   };
-  const toggleTag = (tag: string) => {
-    const index = selectedTags.indexOf(tag);
-    if (index >= 0) {
-      // 已选中，复制没有选中的 tag，作为新的 selectedTag
-      setSelectedTags(selectedTags.filter((t) => t !== tag));
-    } else {
-      setSelectedTags([...selectedTags, tag]);
+  const toggleTag = (e: React.MouseEvent) => {
+    const tag = e.target as HTMLLIElement;
+    if (tag.textContent === null) {
+      return;
+    }
+    if (tag.tagName.toLowerCase() === "li") {
+      const index = selectedTags.indexOf(tag.textContent);
+      if (index >= 0) {
+        // 已选中，复制没有选中的 tag，作为新的 selectedTag
+        setSelectedTags(selectedTags.filter((t) => t !== tag.textContent));
+      } else {
+        setSelectedTags([...selectedTags, tag.textContent]);
+      }
     }
   };
   return (
     <Wrapper>
-      <ol>
+      <ol onClick={toggleTag}>
         {tags.map((tag) => (
           <li
             key={tag}
-            onClick={() => {
-              toggleTag(tag);
-            }}
             className={selectedTags.indexOf(tag) >= 0 ? "selected" : ""}
           >
             {tag}

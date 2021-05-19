@@ -22,11 +22,11 @@ const Wrapper = styled.section`
 `;
 
 const NoteSection: React.FC = () => {
-  // const [note, setNote] = useState<string>("");
+  const [, setNote] = useState<string>("");
   const refInput = useRef<HTMLInputElement>(null);
   const onBlur = () => {
     if (refInput.current) {
-      // setNote(refInput.current.value);
+      setNote(refInput.current.value);
       console.log(refInput.current.value);
     }
   };

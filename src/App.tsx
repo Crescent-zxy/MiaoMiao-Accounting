@@ -1,4 +1,3 @@
-import React from "react";
 import {
   HashRouter as Router,
   Route,
@@ -8,12 +7,14 @@ import {
 import Money from "views/Money";
 import NoMatch from "views/NoMatch";
 import Statistics from "views/Statistics";
+import TagEdit from "views/TagEdit";
 import Tags from "views/Tags";
 
 const App = () => (
   <Router>
     <Switch>
-      <Route path="/tags" component={Tags} />
+      <Route exact path="/tags" component={Tags} />
+      <Route path="/tags/:tag" component={TagEdit} />
       <Route path="/money" component={Money} />
       <Route path="/statistics" component={Statistics} />
       <Redirect exact path="/" to="/money" />

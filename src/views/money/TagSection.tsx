@@ -41,25 +41,25 @@ type Props = {
 
 const TagSection: React.FC<Props> = (props) => {
   const { tags, setTags } = useTags();
-  const selectedTags = props.value;
+  const selectedTagIds = props.value;
   const addTag = () => {
     const tagName = window.prompt("新标签的名称为");
     if (tagName) {
-      setTags([...tags, tagName]);
+      setTags([...tags, { id: Math.random().toString(), name: tagName }]);
     }
   };
   const toggleTag = (e: React.MouseEvent) => {
     const tag = e.target as HTMLLIElement;
-    if (tag.textContent === null) {
+    if (!tag.dataset.id) {
       return;
     }
     if (tag.tagName.toLowerCase() === "li") {
-      const index = selectedTags.indexOf(tag.textContent);
+      const index = selectedTagIds.indexOf(tag.dataset.id);
       if (index >= 0) {
         // 已选中，复制没有选中的 tag，作为新的 selectedTag
-        props.onChange(selectedTags.filter((t) => t !== tag.textContent));
+        props.onChange(selectedTagIds.filter((t) => t !== tag.dataset.id));
       } else {
-        props.onChange([...selectedTags, tag.textContent]);
+        props.onChange([...selectedTagIds, tag.dataset.id]);
       }
     }
   };
@@ -68,10 +68,11 @@ const TagSection: React.FC<Props> = (props) => {
       <ol onClick={toggleTag}>
         {tags.map((tag) => (
           <li
-            key={tag}
-            className={selectedTags.indexOf(tag) >= 0 ? "selected" : ""}
+            key={tag.id}
+            data-id={tag.id}
+            className={selectedTagIds.indexOf(tag.id) >= 0 ? "selected" : ""}
           >
-            {tag}
+            {tag.name}
           </li>
         ))}
       </ol>

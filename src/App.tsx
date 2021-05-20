@@ -14,7 +14,7 @@ const App = () => (
   <Router>
     <Switch>
       <Route exact path="/tags" component={Tags} />
-      <Route path="/tags/:tag" component={TagEdit} />
+      <Route path="/tags/:id" component={TagEdit} />
       <Route path="/money" component={Money} />
       <Route path="/statistics" component={Statistics} />
       <Redirect exact path="/" to="/money" />

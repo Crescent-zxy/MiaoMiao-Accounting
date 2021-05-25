@@ -35,6 +35,7 @@ const Money: React.FC = () => {
         }}
       />
       <NoteSection
+        value={selected.note}
         onChange={(note) => {
           onSelectChange({ note });
         }}

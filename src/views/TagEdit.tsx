@@ -6,6 +6,8 @@ import Layout from "components/Layout";
 import { useTags } from "hooks/useTags";
 import { useParams } from "react-router";
 import styled from "styled-components";
+import React, { ChangeEventHandler } from "react";
+
 type Params = {
   id: string;
 };
@@ -30,9 +32,15 @@ const InputWrapper = styled.div`
 `;
 
 const TagEdit: React.FC = () => {
-  const { findTag } = useTags();
+  const { findTag, editTag, deleteTag } = useTags();
   let { id } = useParams<Params>();
   const tag = findTag(id);
+  const onEdit: ChangeEventHandler<HTMLInputElement> = (e) => {
+    editTag({ id, name: e.target.value });
+  };
+  const onDelete = () => {
+    deleteTag(id);
+  };
   return (
     <Layout>
       <Topbar>
@@ -45,10 +53,11 @@ const TagEdit: React.FC = () => {
           label="标签名"
           placeholder="请填写标签名"
           value={tag.name}
+          onChange={onEdit}
         />
       </InputWrapper>
       <Center>
-        <Button>删除标签</Button>
+        <Button onClick={onDelete}>删除标签</Button>
       </Center>
     </Layout>
   );

@@ -11,7 +11,13 @@ const defaultTags = [
 const useTags = () => {
   const [tags, setTags] = useState<{ id: string; name: string }[]>(defaultTags);
   const findTag = (id: string) => tags.filter((tag) => tag.id === id)[0];
-  return { tags, setTags, findTag };
+  const editTag = ({ id, name }: { id: string; name: string }) => {
+    setTags(tags.map((tag) => (tag.id === id ? { id, name } : tag)));
+  };
+  const deleteTag = (id: string) => {
+    setTags(tags.filter((tag) => tag.id !== id));
+  };
+  return { tags, setTags, findTag, editTag, deleteTag };
 };
 
 export { useTags };

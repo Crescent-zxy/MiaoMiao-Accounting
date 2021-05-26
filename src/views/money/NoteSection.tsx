@@ -1,5 +1,5 @@
 import { Input } from "components/Input";
-import React, { ChangeEventHandler, useRef } from "react";
+import React, { ChangeEventHandler } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.section`

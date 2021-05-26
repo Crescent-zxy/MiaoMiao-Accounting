@@ -4,7 +4,7 @@ import Icon from "components/Icon";
 import { Input } from "components/Input";
 import Layout from "components/Layout";
 import { useTags } from "hooks/useTags";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import styled from "styled-components";
 import React, { ChangeEventHandler } from "react";
 
@@ -35,16 +35,21 @@ const TagEdit: React.FC = () => {
   const { findTag, editTag, deleteTag } = useTags();
   let { id } = useParams<Params>();
   const tag = findTag(id);
+  const history = useHistory();
   const onEdit: ChangeEventHandler<HTMLInputElement> = (e) => {
     editTag({ id, name: e.target.value });
   };
   const onDelete = () => {
     deleteTag(id);
+    history.goBack();
+  };
+  const goBack = () => {
+    history.goBack();
   };
   return (
     <Layout>
       <Topbar>
-        <Icon name="left" />
+        <Icon name="left" onClick={goBack} />
         <span>编辑标签</span>
       </Topbar>
       <InputWrapper>

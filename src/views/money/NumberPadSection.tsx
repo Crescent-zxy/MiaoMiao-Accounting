@@ -100,7 +100,9 @@ const NumberPadSection: React.FC<Props> = (props) => {
         setOutput(output + ".");
         break;
       case "OK":
-        console.log("OK");
+        if (props.onOk) {
+          props.onOk();
+        }
         break;
       case "清空":
         setOutput("0");

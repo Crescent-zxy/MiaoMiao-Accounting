@@ -35,6 +35,17 @@ const TagEdit: React.FC = () => {
   const { findTag, editTag, deleteTag } = useTags();
   let { id } = useParams<Params>();
   const tag = findTag(id);
+  const tagContent = (tag: { id: string; name: string }) => (
+    <InputWrapper>
+      <Input
+        type="text"
+        label="标签名"
+        placeholder="请填写标签名"
+        value={tag.name}
+        onChange={onEdit}
+      />
+    </InputWrapper>
+  );
   const history = useHistory();
   const onEdit: ChangeEventHandler<HTMLInputElement> = (e) => {
     editTag({ id, name: e.target.value });
@@ -52,15 +63,7 @@ const TagEdit: React.FC = () => {
         <Icon name="left" onClick={goBack} />
         <span>编辑标签</span>
       </Topbar>
-      <InputWrapper>
-        <Input
-          type="text"
-          label="标签名"
-          placeholder="请填写标签名"
-          value={tag.name}
-          onChange={onEdit}
-        />
-      </InputWrapper>
+      {tag ? tagContent(tag) : null}
       <Center>
         <Button onClick={onDelete}>删除标签</Button>
       </Center>

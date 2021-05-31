@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react";
 import { useTags } from "hooks/useTags";
-import { createId } from "lib/createId";
 
 const Wrapper = styled.section`
   background-color: #fff;
@@ -41,14 +40,9 @@ type Props = {
 };
 
 const TagSection: React.FC<Props> = (props) => {
-  const { tags, setTags } = useTags();
+  const { tags, addTag } = useTags();
   const selectedTagIds = props.value;
-  const addTag = () => {
-    const tagName = window.prompt("新标签的名称为");
-    if (tagName) {
-      setTags([...tags, { id: createId(), name: tagName }]);
-    }
-  };
+
   const toggleTag = (e: React.MouseEvent) => {
     const tag = e.target as HTMLLIElement;
     if (!tag.dataset.id) {

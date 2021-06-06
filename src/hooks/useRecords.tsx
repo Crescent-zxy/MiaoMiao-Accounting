@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useUpdate } from "./useUpdate";
 import day from "dayjs";
 
-type RecordItem = {
+export type RecordItem = {
   tagIds: string[];
   note: string;
   category: "+" | "-";

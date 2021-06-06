@@ -12,6 +12,10 @@ const MoneyLayout = styled(Layout)`
   flex-direction: column;
 `;
 
+const CategoryWrapper = styled.div`
+  background-color: #c4c4c4;
+`;
+
 type Category = "-" | "+";
 
 const defaultData = {
@@ -50,12 +54,14 @@ const Money: React.FC = () => {
           onSelectChange({ note });
         }}
       />
-      <CategorySection
-        value={selected.category}
-        onChange={(category) => {
-          onSelectChange({ category });
-        }}
-      />
+      <CategoryWrapper>
+        <CategorySection
+          value={selected.category}
+          onChange={(category) => {
+            onSelectChange({ category });
+          }}
+        />
+      </CategoryWrapper>
       <NumberPadSection
         value={selected.amount}
         onChange={(amount) => {

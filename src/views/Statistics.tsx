@@ -1,49 +1,57 @@
 import Layout from "components/Layout";
-import { useEffect, useState } from "react";
+import { useRecords } from "hooks/useRecords";
+import { useTags } from "hooks/useTags";
+import { useState } from "react";
 import styled from "styled-components";
+import { CategorySection } from "./money/CategorySection";
 
-const Wrapper = styled.div`
+const CategoryWrapper = styled.div`
+  background: white;
+`;
+
+const Item = styled.div`
   display: flex;
-  > p {
-    flex-grow: 3;
-    border: solid 1px blue;
-  }
-  > div {
-    flex-grow: 1;
+  justify-content: space-between;
+  background: white;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 16px;
+  > .note {
+    margin-right: auto;
+    margin-left: 16px;
+    color: #999;
   }
 `;
 
 const Statistics: React.FC = () => {
-  const [disabled, setDisabled] = useState<boolean>(false);
-  const [n, setN] = useState<number>(10);
-  useEffect(() => {
-    if (n >= 0 && n < 10) {
-      setTimeout(() => {
-        setN(n - 1);
-      }, 1000);
-      console.log("n", n);
-    } else {
-      setDisabled(false);
-      setN(10);
-      console.log("nnn", n);
-    }
-  }, [n]);
-  const count = () => {
-    setDisabled(true);
-    setN(n - 1);
-  };
+  const [category, setCategory] = useState<"-" | "+">("-");
+  const { records } = useRecords();
+  const { getName } = useTags();
   return (
     <Layout>
-      <button disabled={disabled} onClick={count}>
-        {disabled ? n : "send"}
-      </button>
-      <Wrapper>
-        <div>1</div>
-        <div>1</div>
-        <p>1</p>
-        <div>1</div>
-        <div>1</div>
-      </Wrapper>
+      <CategoryWrapper>
+        <CategorySection
+          value={category}
+          onChange={(value) => setCategory(value)}
+        />
+      </CategoryWrapper>
+      <div>
+        {records
+          .filter((i) => i.category === category)
+          ?.map((r, index) => {
+            return (
+              <Item key={index}>
+                <div className="tags">
+                  {r.tagIds.map((tagId) => (
+                    <span key={tagId}>{getName(tagId)}</span>
+                  ))}
+                </div>
+                {r.note && <div className="note">{r.note}</div>}
+                <div className="amount">￥{r.amount}</div>
+              </Item>
+            );
+          })}
+      </div>
     </Layout>
   );
 };

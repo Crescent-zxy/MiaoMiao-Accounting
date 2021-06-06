@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUpdate } from "./useUpdate";
+import day from "dayjs";
 
 type RecordItem = {
   tagIds: string[];
@@ -24,7 +25,7 @@ const useRecords = () => {
     }
     const newRecord = {
       ...record,
-      createTime: new Date().toISOString(),
+      createTime: day(new Date().toISOString()).format("YYYY.MM.DD"),
     };
     setRecords([...records, newRecord]);
     return true;

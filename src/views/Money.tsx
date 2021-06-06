@@ -41,7 +41,7 @@ const Money: React.FC = () => {
     }
   };
   return (
-    <MoneyLayout>
+    <MoneyLayout scrollTop={999}>
       <TagSection
         value={selected.tagIds}
         onChange={(tagIds) => {
